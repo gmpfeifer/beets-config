@@ -1,0 +1,32 @@
+directory: /mnt/beets/music
+library: /mnt/beets/data/musiclibrary.db
+import:
+  copy: yes
+  # incremental: yes
+  quiet: yes
+  log: ~/beetslog.txt
+
+plugins: convert fetchart embedart
+pluginpath: ~/beets/myplugins
+
+ui:
+  color: yes
+
+fetchart:
+  auto: yes
+
+embedart:
+  auto: yes
+  maxwidth: 900
+  quality: 85
+
+convert:
+  auto: yes
+  copy_album_art: yes
+  never_convert_lossy_files: yes
+  format: m4a
+  formats:
+    m4a:
+            #command: ffmpeg -i $source -y -c:v copy -c:a libfdk_aac -vbr 5 $dest
+            command: ffmpeg -i $source -y -c:v copy -c:a libfdk_aac -b:a 256k $dest
+  dest: /mnt/transcoded/
